@@ -2,6 +2,7 @@ import Expo from 'expo';
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, StatusBar } from 'react-native';
 import { fetchQuote } from './apiUtils'
+import Quote from './quote'
 
 class App extends React.Component {
   state = {
@@ -14,13 +15,15 @@ class App extends React.Component {
         <StatusBar
           backgroundColor="blue"
           barStyle="light-content" />
-        <Text style={styles.headerText}>Welcome to the Guy Fieri Quote Generator</Text>
-        <TouchableOpacity
-          onPress={() => this._getQuote()}
-          style={styles.button} >
-          <Text style={styles.buttonText}>Get a Quote</Text>
-        </TouchableOpacity>
-        <Text style={styles.bodyText}>{this.state.quote}</Text>
+        <View>
+          <Text style={styles.headerText}>Welcome to the Guy Fieri Quote Generator</Text>
+          <TouchableOpacity
+            onPress={() => this._getQuote()}
+            style={styles.button} >
+            <Text style={styles.buttonText}>Get a Quote</Text>
+          </TouchableOpacity>
+          { this.state.quote === '' ? null : <Quote quote={this.state.quote} /> }
+        </View>
       </View>
     );
   }

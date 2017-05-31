@@ -11,7 +11,6 @@ export const fetchQuote = async () => {
   try {
     let response = await fetch(quoteUrl);
     let responseJson = await response.json();
-    console.log(responseJson)
     return responseJson
   } catch(error) {
     console.log(error);
