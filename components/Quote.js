@@ -1,17 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-class Quote extends React.Component {
-  render() {
-    const { quote } = this.props
-
-    return (
-      <View style={styles.quote}>
-        <Text style={styles.bodyText}>{quote}</Text>
-      </View>
-    )
-  }
-}
+const Quote = ({quote}) => (
+  <View style={styles.quote}>
+    <Text style={styles.bodyText}>{quote}</Text>
+  </View>
+)
 
 const styles = StyleSheet.create({
   bodyText: {

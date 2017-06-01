@@ -6,6 +6,7 @@ import Quote from './Quote'
 
 class App extends React.Component {
   render() {
+    const { quote, fetchQuote } = this.props
     return (
       <View style={styles.container}>
         <StatusBar
@@ -14,18 +15,14 @@ class App extends React.Component {
         <View>
           <Text style={styles.headerText}>Welcome to the Guy Fieri Quote Generator</Text>
           <TouchableOpacity
-            onPress={() => this._getQuote()}
+            onPress={fetchQuote}
             style={styles.button} >
             <Text style={styles.buttonText}>Get a Quote</Text>
           </TouchableOpacity>
-          { this.props.quote === null ? null : <Quote quote={this.props.quote} /> }
+          { quote ? <Quote quote={quote} /> : null }
         </View>
       </View>
     );
-  }
-
-  _getQuote = () => {
-    this.props.fetchQuote()
   }
 }
 
