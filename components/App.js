@@ -1,14 +1,10 @@
-import Expo from 'expo';
 import React from 'react';
+import { connect } from 'react-redux'
 import { StyleSheet, Text, View, Button, TouchableOpacity, StatusBar } from 'react-native';
-import { fetchQuote } from '../apiUtils'
+import { fetchQuote } from '../actions'
 import Quote from './Quote'
 
 class App extends React.Component {
-  state = {
-    quote: ''
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -22,15 +18,14 @@ class App extends React.Component {
             style={styles.button} >
             <Text style={styles.buttonText}>Get a Quote</Text>
           </TouchableOpacity>
-          { this.state.quote === '' ? null : <Quote quote={this.state.quote} /> }
+          { this.props.quote === null ? null : <Quote quote={this.props.quote} /> }
         </View>
       </View>
     );
   }
 
-  _getQuote = async () => {
-    const quote = await fetchQuote()
-    this.setState({ quote: quote })
+  _getQuote = () => {
+    this.props.fetchQuote()
   }
 }
 
@@ -65,4 +60,19 @@ const styles = StyleSheet.create({
   }
 });
 
-export default App
+const mapStateToProps = (state) => {
+  return {
+    quote: state.quote
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchQuote: () => dispatch(fetchQuote())
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
