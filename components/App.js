@@ -1,26 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux'
-import { StyleSheet, Text, View, Button, TouchableOpacity, StatusBar } from 'react-native';
-import { fetchQuote } from '../actions'
-import Quote from './Quote'
+import React from 'react'
+import { View, StatusBar, StyleSheet } from 'react-native'
+import ContentContainer from './ContentContainer'
 
 class App extends React.Component {
   render() {
-    const { quote, fetchQuote } = this.props
     return (
       <View style={styles.container}>
         <StatusBar
           backgroundColor="blue"
           barStyle="light-content" />
-        <View>
-          <Text style={styles.headerText}>Welcome to the Guy Fieri Quote Generator</Text>
-          <TouchableOpacity
-            onPress={fetchQuote}
-            style={styles.button} >
-            <Text style={styles.buttonText}>Get a Quote</Text>
-          </TouchableOpacity>
-          { quote ? <Quote quote={quote} /> : null }
-        </View>
+        <ContentContainer />
       </View>
     );
   }
@@ -33,43 +22,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 15
-  },
-  headerText: {
-    color: '#fff',
-    fontSize: 24,
-    textAlign: 'center'
-  },
-  bodyText: {
-    color: '#fff',
-    textAlign: 'center'
-  },
-  button: {
-    marginTop: 10,
-    marginBottom: 10,
-    backgroundColor: '#D91C5C',
-    padding: 10,
-    borderRadius: 3
-  },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 16
   }
 });
 
-const mapStateToProps = (state) => {
-  return {
-    quote: state.quote
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchQuote: () => dispatch(fetchQuote())
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default App
