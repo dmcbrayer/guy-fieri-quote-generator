@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { fetchQuote } from '../actions'
 import Quote from './Quote'
 
 class ContentContainer extends React.Component {
   render() {
-    const { quote, fetchQuote } = this.props
+    const { quote, fetchQuote, isLoading } = this.props
     return(
       <View>
         <Text style={styles.headerText}>Welcome to the Guy Fieri Quote Generator</Text>
@@ -15,6 +15,9 @@ class ContentContainer extends React.Component {
           style={styles.button} >
           <Text style={styles.buttonText}>Get a Quote</Text>
         </TouchableOpacity>
+        <ActivityIndicator 
+          animating={isLoading} 
+          style={styles.loadingIndicator} />
         { quote ? <Quote quote={quote} /> : null }
       </View>
     )
@@ -29,7 +32,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 5,
     backgroundColor: '#D91C5C',
     padding: 10,
     borderRadius: 3
@@ -38,12 +41,17 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     fontSize: 16
+  },
+  loadingIndicator: {
+    marginTop: 5,
+    marginBottom: 10
   }
 });
 
 const mapStateToProps = (state) => {
   return {
-    quote: state.quote
+    quote: state.quote,
+    isLoading: state.isLoading
   }
 }
 

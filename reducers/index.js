@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import { quote } from './quote'
+import { loading } from './loading'
 
 const rootReducer = combineReducers({
-  quote
+  quote,
+  isLoading: loading
 })
 
 export default rootReducer

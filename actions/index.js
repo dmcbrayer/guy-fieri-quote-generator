@@ -7,9 +7,22 @@ export const setQuote = (quote) => {
   }
 }
 
+export const beginFetch = () => {
+  return {
+    type: 'BEGIN_FETCH',
+  }
+}
+
+export const endFetch = () => {
+  return {
+    type: 'END_FETCH',
+  }
+}
+
 
 export const fetchQuote = () => {
   return async (dispatch) => {
+    dispatch(beginFetch())
     try {
       let response = await fetch(quoteUrl);
       let responseJson = await response.json();
@@ -17,5 +30,6 @@ export const fetchQuote = () => {
     } catch(error) {
       console.log(error);
     }
+    dispatch(endFetch())
   }
 }
